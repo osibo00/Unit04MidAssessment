@@ -3,6 +3,8 @@ package productions.darthplagueis.unit04midassessment.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import productions.darthplagueis.unit04midassessment.R;
  * A simple {@link Fragment} subclass.
  */
 public class DisplayFragment extends Fragment {
+    private View rootView;
 
 
     public DisplayFragment() {
@@ -24,7 +27,21 @@ public class DisplayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_display, container, false);
+        rootView = inflater.inflate(R.layout.fragment_display, container, false);
+
+        TopFragment topFragment = new TopFragment();
+        FragmentManager fragmentManagerTop = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransactionTop = fragmentManagerTop.beginTransaction();
+        fragmentTransactionTop.replace(R.id.top_frag_container, topFragment);
+        fragmentTransactionTop.commit();
+
+        BottomFragment bottomFragment = new BottomFragment();
+        FragmentManager fragmentManagerBottom = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransactionBottom = fragmentManagerBottom.beginTransaction();
+        fragmentTransactionBottom.replace(R.id.bottom_frag_container, bottomFragment);
+        fragmentTransactionBottom.commit();
+
+        return rootView;
     }
 
 }
